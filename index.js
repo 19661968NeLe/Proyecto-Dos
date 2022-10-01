@@ -2,23 +2,24 @@ let listaparticipantes = [];
 
 const objParticipantes = {
     id: '',
-    participantes: '',
-    motocicleta: ''
+    nombre: '',
+    motocicleta: '',
 }
 
 let editando = false;
 
 const formulario = document.querySelector('#formulario');
-const participantesImput = document.querySelector('#participantes');
+const nombreImput = document.querySelector('#nombre');
 const motocicletaImput = document.querySelector('#motocicleta');
 const btnAgregar = document.querySelector('#btnAgregar');
 
 formulario.addEventListener('submit', validarFormulario);
 
 function validarFormulario(e) {
-    e.prevetDefault();
+    e.preventDefault();
 
-    if (participanteImput.value === '' || motocicletaImput.value === '') {
+    if (nmbreImput.value === '' || motocicletaImput.value === '') {
+        alert('Todos los campos son obligatorios.');
         return;
     }
 
@@ -30,17 +31,21 @@ function validarFormulario(e) {
         objParticipantes.nombre = nombreImput.value;
         objParticipantes.motocicleta = motocicleta.value;
 
-        agregarParticipantes()
+        agregarParticipantes();
 
     }
 }
-function agregarParticipantes() {
-    listaparticipante.push({ ...objParticipantes })
+function agregarParticipante() {
+    listaparticipantes.push({ ...objParticipante });
 
     mostrarParticipantes();
 }
+
 function mostrarParticipantes() {
-    const divParticipantes = document.querySelector('.div-participante');
+
+    limpiarHTML();
+
+    const divParticipantes = document.querySelector('.div-participantes');
 
     listaparticipantes.forEach(participantes => {
         const { id, nombre, motocicleta } = participantes;
@@ -49,15 +54,15 @@ function mostrarParticipantes() {
         parrafo.textContent = '${id} - ${nombre} - ${motocicleta} - ';
         parrafo.dataset.id = id;
 
-        const editarBoton = document.createParticipantes('button');
-        //editarBoton.onclick = () => editarParticipantes(participante);//
+        const editarBoton = document.createElement('button');
+        //editarBoton.onclick = () => cargarParticipante(participante);//
         editarBoton.textContent = 'Editar';
         editarBoton.clssList.add('btn', 'btn-editar');
         parrafo.append(editarBoton);
 
-        const eliminarBoton = document.createParticipantes('button');
-        //eliminarBoton.onclick = () => eliminarrParticipantes();//
-        eliminarBoton.textContent = 'Eliminar';
+        const eliminarBoton = document.createElement('button');
+        //eliminarBoton.onclick = () => eliminarParticipante(participante);//
+        eliminarBoton.textContent = 'eliminar';
         eliminarBoton.clssList.add('btn', 'btn-eliminar');
         parrafo.append(eliminarBoton);
 
@@ -66,11 +71,15 @@ function mostrarParticipantes() {
         divParticipantes.appendChild(hr);
 
 
-        
+    });
+    }
+    function limpiarHTML() {
+        const divParticipantes = document.querySelector('div-participantes');
+        while(divParticipantes.firstChild) {
+            divParticipantes.removeChild(divParticipantes.firstChild);
+        }
 
+    }
 
-
-    })
-}
 
 
