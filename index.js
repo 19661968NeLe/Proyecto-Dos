@@ -18,13 +18,14 @@ formulario.addEventListener('submit', validarFormulario);
 function validarFormulario(e) {
     e.preventDefault();
 
-    if (nmbreImput.value === '' || motocicletaImput.value === '') {
+    if (nombreImput.value === '' || motocicletaImput.value === '') {
         alert('Todos los campos son obligatorios.');
         return;
     }
 
     if (editando) {
-        //editarParticipantes//
+        editarParticipantes;
+
         editando = false;
     } else {
         objParticipantes.id = date.now();
@@ -35,8 +36,8 @@ function validarFormulario(e) {
 
     }
 }
-function agregarParticipante() {
-    listaparticipantes.push({ ...objParticipante });
+function agregarParticipantes() {
+    listaparticipantes.push({ ...objParticipantes });
 
     mostrarParticipantes();
 }
@@ -55,13 +56,16 @@ function mostrarParticipantes() {
         parrafo.dataset.id = id;
 
         const editarBoton = document.createElement('button');
-        //editarBoton.onclick = () => cargarParticipante(participante);//
+        editarBoton.onclick = () => cargarParticipante(participante);
+
         editarBoton.textContent = 'Editar';
         editarBoton.clssList.add('btn', 'btn-editar');
         parrafo.append(editarBoton);
 
         const eliminarBoton = document.createElement('button');
-        //eliminarBoton.onclick = () => eliminarParticipante(participante);//
+        
+        eliminarBoton.onclick = () => eliminarParticipante(participante);
+
         eliminarBoton.textContent = 'eliminar';
         eliminarBoton.clssList.add('btn', 'btn-eliminar');
         parrafo.append(eliminarBoton);
@@ -72,6 +76,17 @@ function mostrarParticipantes() {
 
 
     });
+    }
+    function cargarParticipante(participante){
+        const {id, nombre, motocicleta,;
+        nombreImput.value = nombre;
+        puestoImput.value =motocicleta;
+
+        objParticipante.id = id;
+        formulario.querySelector('button[type="submit"]').textContent = 'Actualizar';
+
+        editando = true
+        }
     }
     function limpiarHTML() {
         const divParticipantes = document.querySelector('div-participantes');
